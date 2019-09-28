@@ -9,11 +9,12 @@
 <script>
 import HelloWorld from './components/HelloWorld';
 import Todo from './components/Todo.list.component';
+
 export default {
   name: 'App',
   components: {
     HelloWorld,
-    Todo
+    Todo,
   },
 };
 </script>
