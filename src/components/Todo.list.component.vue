@@ -65,13 +65,17 @@ export default {
       if (this.newTodo.trim().length === 0) {
         return
       }
-      this.todos.push({
+      const alena = [...this.todos]
+      alena.push({
         id: this.idForTodo,
         title: this.newTodo,
         completed: false,
       })
+      console.table(alena)
+      console.log(this.todos)
       this.newTodo = ''
       this.idForTodo++
+      this.todos = alena
     },
     editTodo(todo) {
       this.beforeEditCache = todo.title
