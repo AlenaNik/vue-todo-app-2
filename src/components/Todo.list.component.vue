@@ -10,10 +10,13 @@
       <div class="todo-item-left">
         <input type="checkbox" v-model="todo.completed">
         <div v-if="!todo.editing" @dblclick="editTodo(todo)" class="todo-item-label">{{ todo.title }}</div>
-        <input v-else class="todo-item-edit" type="text" v-model="todo.title" @blur="doneEdit(todo)"
+        <input v-else class="todo-item-edit"
+               type="text"
+               v-model="todo.title"
+               @blur="doneEdit(todo)"
                @keyup.enter="doneEdit(todo)"
                v-focus
-               @keyup.esc="resetEdit(todo)"
+               @keyup.esc="cancelEdit(todo)"
         >
       </div>
       <div class="remove-items" @click="removeTodo(index)">
@@ -65,29 +68,22 @@ export default {
       if (this.newTodo.trim().length === 0) {
         return
       }
-      const alena = [...this.todos]
-      alena.push({
+      this.todos.push({
         id: this.idForTodo,
         title: this.newTodo,
         completed: false,
       })
-      console.table(alena)
-      console.log(this.todos)
       this.newTodo = ''
       this.idForTodo++
-      this.todos = alena
     },
     editTodo(todo) {
       this.beforeEditCache = todo.title
       todo.editing = true
     },
     doneEdit(todo) {
-      if (todo.title.trim() === '') {
-        todo.title = this.beforeEditCache
-      }
       todo.editing = false
     },
-    resetEdit(todo) {
+    cancelEdit(todo) {
       todo.title = this.beforeEditCache
       todo.editing = false
     },
@@ -139,6 +135,7 @@ export default {
 .todo-item-edit {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   color: #2c3e50;
+  font-size: 15px;
   margin-left: 12px;
   width: 100%;
   padding: 10px 18px;
