@@ -41,7 +41,7 @@ export default {
   display: block;
   margin: 20px auto;
   font-size: 20px;
-  color: aliceblue;
+  color: pink;
 }
 .logo {
   display: block;
