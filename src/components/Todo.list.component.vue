@@ -9,7 +9,8 @@
     <div v-for="(todo, index) in todos" :key="todo.id" class="todo-item">
       <div class="todo-item-left">
         <input type="checkbox" v-model="todo.completed">
-        <div v-if="!todo.editing" @dblclick="editTodo(todo)" class="todo-item-label">{{ todo.title }}</div>
+        <div v-if="!todo.editing" @dblclick="editTodo(todo)"
+             class="todo-item-label" :class="{ completed : todo.completed}">{{ todo.title }}</div>
         <input v-else class="todo-item-edit"
                type="text"
                v-model="todo.title"
@@ -23,6 +24,15 @@
         &times;
       </div>
     </div>
+
+   <div class="extra-container">
+      <div><label><input type="checkbox" :checked="!anyRemaining"
+      @change="checkAllTodos">
+          Check All
+        </label>
+      </div>
+     <div>{{ remaining }} items left</div>
+   </div>
   </div>
 </template>
 
@@ -55,6 +65,14 @@ export default {
         },
       ]
     }
+  },
+  computed: {
+    remaining() {
+      return this.todos.filter(todo => !todo.completed).length
+    },
+    anyRemaining() {
+      return this.remaining !== 0
+    },
   },
   directives: {
     focus: {
@@ -89,6 +107,9 @@ export default {
     },
     removeTodo(index) {
       this.todos.splice(index, 1)
+    },
+    checkAllTodos() {
+      this.todos.forEach((todo) => todo.completed = event.target.checked)
     }
   }
 }
@@ -145,5 +166,36 @@ export default {
     outline: none;
   }
 }
+
+.completed {
+  text-decoration: line-through;
+  color: lightslategray;
+}
+
+.extra-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  border-top: 1px solid lightgray;
+  padding-top: 14px;
+  margin-bottom: 14px
+}
+
+  button {
+    font-size: 14px;
+    background-color: white;
+    appearance: none;
+
+    &:hover {
+      background: lightgreen;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  .active {
+    background: lightgreen;
+  }
 
 </style>

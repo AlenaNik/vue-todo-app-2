@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="container">
-    <img src="./assets/logo.png" class="logo">
+   <h1 class="title">TODOS</h1>
+    <img src="./assets/logo.png" alt="vue logo" class="logo">
     <HelloWorld/>
     <Todo/>
   </div>
@@ -36,10 +37,16 @@ export default {
   max-width: 600px;
   margin: 0 auto;
 }
+.title {
+  display: block;
+  margin: 20px auto;
+  font-size: 20px;
+  color: aliceblue;
+}
 .logo {
   display: block;
   margin: 20px auto;
-  height: 75px;
+  height: 25px;
 }
 
 </style>
