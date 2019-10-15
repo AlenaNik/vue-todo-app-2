@@ -1,16 +1,16 @@
 <template>
 <div class="todo-item">
   <div class="todo-item-left">
-    <input type="checkbox" v-model="todo.completed">
-    <div v-if="!todo.editing" @dblclick="editTodo(todo)"
-         class="todo-item-label" :class="{ completed : todo.completed}">{{ todo.title }}</div>
+    <input type="checkbox" v-model="completed">
+    <div v-if="!editing" @dblclick="editTodo"
+         class="todo-item-label" :class="{ completed : completed}">{{ title }}</div>
     <input v-else class="todo-item-edit"
            type="text"
-           v-model="todo.title"
-           @blur="doneEdit(todo)"
-           @keyup.enter="doneEdit(todo)"
+           v-model="title"
+           @blur="doneEdit"
+           @keyup.enter="doneEdit"
            v-focus
-           @keyup.esc="cancelEdit(todo)"
+           @keyup.esc="cancelEdit"
     >
   </div>
   <div class="remove-items" @click="removeTodo(index)">
@@ -29,6 +29,15 @@ export default {
     index: {
       type: Number,
       required: true,
+    }
+  },
+  data() {
+    return {
+      'id': this.todo.title,
+      'title': this.todo.title,
+      'completed': this.todo.completed,
+      'editing': this.todo.editing,
+      'beforeEditCache': '',
     }
   }
 }
