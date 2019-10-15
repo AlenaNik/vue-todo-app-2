@@ -6,24 +6,8 @@
            v-model="newTodo"
            @keyup.enter="addTodo"
     >
-    <div v-for="(todo, index) in todosFiltered" :key="todo.id" class="todo-item">
-      <div class="todo-item-left">
-        <input type="checkbox" v-model="todo.completed">
-        <div v-if="!todo.editing" @dblclick="editTodo(todo)"
-             class="todo-item-label" :class="{ completed : todo.completed}">{{ todo.title }}</div>
-        <input v-else class="todo-item-edit"
-               type="text"
-               v-model="todo.title"
-               @blur="doneEdit(todo)"
-               @keyup.enter="doneEdit(todo)"
-               v-focus
-               @keyup.esc="cancelEdit(todo)"
-        >
-      </div>
-      <div class="remove-items" @click="removeTodo(index)">
-        &times;
-      </div>
-    </div>
+    <todo-item v-for="(todo, index) in todosFiltered" :key="todo.id" :todo="todo" :index="index">
+    </todo-item>
 
    <div class="extra-container">
       <div><label><input type="checkbox" :checked="!anyRemaining"
@@ -52,8 +36,12 @@
 </template>
 
 <script>
+import TodoItem from './TodoItem.component';
+
 export default {
   name: 'Todo',
+  components: { TodoItem },
+  component: 'TodoItem',
   data() {
     return {
       newTodo: '',
