@@ -39,6 +39,11 @@ export default {
       'editing': this.todo.editing,
       'beforeEditCache': '',
     }
+  },
+  methods: {
+      removeTodo(index){
+        this.$emit('removedTodo', index)
+    }
   }
 }
 </script>

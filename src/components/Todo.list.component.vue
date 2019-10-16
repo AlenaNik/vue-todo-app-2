@@ -6,7 +6,11 @@
            v-model="newTodo"
            @keyup.enter="addTodo"
     >
-    <todo-item v-for="(todo, index) in todosFiltered" :key="todo.id" :todo="todo" :index="index">
+    <todo-item v-for="(todo, index) in todosFiltered"
+               :key="todo.id"
+               :todo="todo"
+               :index="index"
+               @removedTodo="removeTodo">
     </todo-item>
 
    <div class="extra-container">
