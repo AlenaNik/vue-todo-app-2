@@ -97,13 +97,6 @@ export default {
       return this.todos.filter(todo => todo.completed).length > 0
     }
   },
-  directives: {
-    focus: {
-      inserted: function (el) {
-        el.focus()
-      }
-    }
-  },
   methods: {
     addTodo() {
       if (this.newTodo.trim().length === 0) {

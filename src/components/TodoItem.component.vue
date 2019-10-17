@@ -50,6 +50,13 @@ export default {
       this.completed = this.checkAll ? true : this.todo.completed
     }
   },
+  directives: {
+    focus: {
+      inserted: function (el) {
+        el.focus()
+      }
+    }
+  },
   methods: {
       removeTodo(index){
         this.$emit('removedTodo', index)
