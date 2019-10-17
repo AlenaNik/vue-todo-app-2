@@ -10,7 +10,9 @@
                :key="todo.id"
                :todo="todo"
                :index="index"
-               @removedTodo="removeTodo">
+               @removedTodo="removeTodo"
+               @finishedEdit="finishedEdit"
+               :checkAll="!anyRemaining">
     </todo-item>
 
    <div class="extra-container">
@@ -115,17 +117,6 @@ export default {
       this.newTodo = ''
       this.idForTodo++
     },
-    editTodo(todo) {
-      this.beforeEditCache = todo.title
-      todo.editing = true
-    },
-    doneEdit(todo) {
-      todo.editing = false
-    },
-    cancelEdit(todo) {
-      todo.title = this.beforeEditCache
-      todo.editing = false
-    },
     removeTodo(index) {
       this.todos.splice(index, 1)
     },
@@ -134,6 +125,9 @@ export default {
     },
     clearCompleted() {
       this.todos = this.todos.filter(todo => !todo.completed)
+    },
+    finishedEdit(data) {
+      this.todos.splice(data.index, 1, data.todo)
     }
   }
 }
