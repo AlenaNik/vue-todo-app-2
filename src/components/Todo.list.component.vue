@@ -10,8 +10,6 @@
                :key="todo.id"
                :todo="todo"
                :index="index"
-               @removedTodo="removeTodo"
-               @finishedEdit="finishedEdit"
                :checkAll="!anyRemaining">
     </todo-item>
 
@@ -75,6 +73,10 @@ export default {
         },
       ]
     }
+  },
+  created(){
+    eventBus.$on('removedTodo', (index) => this.removeTodo(index))
+    eventBus.$on('finishedEdit', (data) => this.finishedEdit(data))
   },
   computed: {
     remaining() {
